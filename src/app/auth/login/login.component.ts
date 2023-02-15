@@ -1,0 +1,53 @@
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {Router} from "@angular/router";
+import { AuthService } from '../auth.service';
+import { Login } from '../model/login.model';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent {
+
+  constructor(private router: Router,
+    private readonly loginService: AuthService) { }
+
+  loginForm: FormGroup = new FormGroup({
+    username : new FormControl('', [Validators.required]),
+    password : new FormControl('', [Validators.required, Validators.minLength(4)])
+  })
+
+
+
+  signUp(){
+    this.router.navigateByUrl('/register')
+  }
+
+
+  login(params: Login){
+    if(this.loginForm.valid){
+    // if(params.username === 'admin@example.com' && params.password === 'password'){
+      this.loginService.login(params)
+      this.loginService.login(params).subscribe((res: any) => {
+        console.log('login success with username '+ res)
+        this.router.navigateByUrl('/home')
+      })
+  
+      // alert('login success with username '+ params.username)
+      // sessionStorage.setItem('token', '1234')
+      // this.router.navigateByUrl('/todo-list')
+    // } else{
+    //   alert('Invalid email or password!')
+    // }
+  }
+  }
+
+
+  form(property: string): FormGroup{
+    return this.loginForm.get(property) as FormGroup;
+  }
+
+
+}

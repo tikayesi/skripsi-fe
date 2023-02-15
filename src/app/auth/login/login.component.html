@@ -1,0 +1,46 @@
+<div style="background-image: url('assets/images/background.jpeg');
+background-position: top; background-size: cover; background-repeat: no-repeat">
+<div class="container" >
+  <div class="row align-items-center vh-100">
+    <div class="col-5 mx-auto">
+      <div class="card shadow border">
+        <div class="card-body d-flex flex-column align-items-center">
+          <img src="assets/images/logo.jpeg" width="80" height="80">
+          <form [formGroup]="loginForm" method="post" (ngSubmit)="login(loginForm.value)">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Username</label>
+              <input type="text" class="form-control" id="exampleInputEmail1" formControlName="username" aria-describedby="emailHelp" placeholder="Username">
+              <div *ngIf="form('username').invalid && form('username').dirty || form('username').touched">
+                <!-- <div class="alert alert-danger" role="alert">This field is required</div> -->
+                <div class="alert alert-danger" role="alert" *ngIf="form('username').errors?.['required']">
+                    This field is required
+                </div>
+            </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control" formControlName="password" id="exampleInputPassword1" placeholder="Password">
+              <div *ngIf="form('password').invalid && form('password').dirty || form('password').touched">
+                <!-- <div class="alert alert-danger" role="alert">This field is required</div> -->
+                <div class="alert alert-danger" role="alert" *ngIf="form('password').errors?.['required']">
+                    This field is required
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="form('password').errors?.['minlength']">
+                  Password lenght can't less than 8 characters.
+                </div>
+              </div>
+          
+            </div>
+            <div class="form-label">
+              <small>Belum punya akun? </small>
+              <a style="color: blue" (click)="signUp()">Daftar Disini</a>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Submit</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
