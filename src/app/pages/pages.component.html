@@ -1,0 +1,44 @@
+<nav class="navbar navbar-light bg-light mb-3">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <div class="row">
+            <div class="col">
+        <img src="assets/images/logo.png" alt="" width="50" height="50">
+    </div>
+    <div class="col">
+       <h6 style="color: chocolate;"> Dinas Pemberdayaan Perempuan, Perlindungan Anak <br>
+        dan Kependudukan Provinsi Jawa Timur
+    </h6>
+    </div>
+    </div>
+      </a>
+      <div>
+      Welcome, User
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-2 bg-light">
+        <div class="col-12 btn btn-info m-1 bi bi-pc-display-horizontal" type="button" routerLink="/pages">
+          Dashboard
+        </div>
+        <div class="col-12 btn btn-info m-1 bi bi-file-earmark-text" type="button" routerLink="/pages/report-list">
+          Laporan
+        </div>
+        <div class="col-12 btn btn-info m-1 bi bi-clock-history" type="button">
+          Data Kasus
+        </div>
+        <div class="col-12 btn btn-info m-1 bi bi-clock-history" type="button">
+          Data User
+        </div>
+        <div class="col-12 btn btn-danger m-1 bi bi-box-arrow-in-right" type="button" routerLink="/">
+          Logout
+        </div>
+      </div>
+      <div class="col-10">
+  <router-outlet></router-outlet>
+  </div>
+    </div>
+  </div>
+  

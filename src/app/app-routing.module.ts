@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from "./auth/login/login.component";
 import {RegisterComponent} from "./auth/register/register.component";
 import { HomeComponent } from './pages/home/home.component';
+import { ReportFormComponent } from './pages/report/report-form/report-form.component';
 
 const routes: Routes = [
   {
@@ -14,9 +15,15 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
-    path: 'home',
-    component: HomeComponent
+    path: 'report-form',
+    component: ReportFormComponent
   },
+  {
+    path: 'pages',
+    loadChildren: () => import('./pages/pages.module').then((m) => m.PagesModule),
+    // canActivate: [AuthGuardGuard]
+  },
+
 
 ];
 

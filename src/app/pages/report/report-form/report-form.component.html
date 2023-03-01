@@ -1,0 +1,144 @@
+<form>
+    <div class="row">
+        <div class="col">
+           <h4> Pelapor</h4>
+            <div class="mb-3">
+                <label for="nik" class="form-label">NIK</label>
+                <input type="text" class="form-control" id="nik" aria-describedby="nik">
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Nama</label>
+                <input type="text" class="form-control" id="name">
+            </div>
+            <div class="mb-3">
+                <label for="birthPlace" class="form-label">Tempat Lahir</label>
+                <input type="text" class="form-control" id="birthplace">
+            </div>
+            <div class="mb-3">
+                <label for="birthDate" class="form-label">Tanggal Lahir</label>
+                <input type="date" class="form-control" id="birthdate">
+            </div>
+            <div class="mb-3">
+                <label for="telephone" class="form-label">Nomor Telpon</label>
+                <input type="text" class="form-control" id="telephone">
+            </div>
+            <div class="mb-3">
+                <label for="gender" class="form-label">Jenis Kelamin</label>
+                <input type="text" class="form-control" id="gender">
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Alamat</label>
+                <input type="text" class="form-control" id="address">
+            </div>
+            <h4> Korban</h4>
+            <div class="mb-3">
+                <label for="nik" class="form-label">NIK</label>
+                <input type="text" class="form-control" id="nik" aria-describedby="nik">
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Nama</label>
+                <input type="text" class="form-control" id="name">
+            </div>
+            <button type="button" class="btn btn-info">Tambah</button>
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+
+        <div class="col">
+         
+            <h4> Terlapor </h4>
+            <div class="mb-3">
+                <label for="nik" class="form-label">NIK</label>
+                <input type="text" class="form-control" id="nik" aria-describedby="nik">
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Nama</label>
+                <input type="text" class="form-control" id="name">
+            </div>
+            <button type="button" class="btn btn-info">Tambah</button>
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <h4> Ringkasan Keluhan </h4>
+              <div class="mb-3">
+                <label for="problem" class="form-label">Permasalahan Utama</label>
+                <input type="text" class="form-control" id="problem" aria-describedby="problem">
+            </div>
+              <div class="mb-3">
+                <label for="kind" class="form-label">Jenis Kekerasan</label>
+                <input type="text" class="form-control" id="kind" aria-describedby="kind">
+            </div>
+            <div class="mb-3">
+                <label for="shape" class="form-label">Bentuk Kekerasan</label>
+                <input type="text" class="form-control" id="shape" aria-describedby="shape">
+            </div>
+            <h4> Kronologi Singkat Kasus </h4>
+            <div class="mb-3">
+                <label for="location" class="form-label">Lokasi Kejadian</label>
+                <input type="text" class="form-control" id="location" aria-describedby="location">
+            </div>
+            <div class="mb-3">
+                <label for="time" class="form-label">Waktu Kejadian</label>
+                <input type="date" class="form-control" id="time" aria-describedby="time">
+            </div>
+            <div class="mb-3">
+                <label for="relation" class="form-label">Hubungan Pelaku Dengan Korban</label>
+                <input type="date" class="form-control" id="relation" aria-describedby="relation">
+            </div>
+            <div class="mb-3">
+                <label for="history" class="form-label">Riwayat Kasus</label>
+                <textarea class="form-control" id="history" aria-describedby="history"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="cancellor" class="form-label">Penanggung Jawab</label>
+                <input type="text" class="form-control" id="cancellor" aria-describedby="cancellor">
+            </div> 
+            <button type="button" class="btn btn-warning" routerLink="/pages/report-list">Cancel</button>
+            <button type="submit" class="btn btn-primary"routerLink="/pages/report-list">Submit</button>
+        </div>
+    </div>
+</form>

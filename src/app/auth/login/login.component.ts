@@ -28,19 +28,20 @@ export class LoginComponent {
 
   login(params: Login){
     if(this.loginForm.valid){
-    // if(params.username === 'admin@example.com' && params.password === 'password'){
-      this.loginService.login(params)
-      this.loginService.login(params).subscribe((res: any) => {
-        console.log('login success with username '+ res)
-        this.router.navigateByUrl('/home')
-      })
-  
+    if(params.username === 'admin@example.com' && params.password === 'password'){
+      // this.loginService.login(params)
+      // this.loginService.login(params).subscribe((res: any) => {
+      //   console.log('login success with username '+ res.data.username)
+      //   sessionStorage.setItem("token", "Bearer " + res.data.token);
+        this.router.navigateByUrl('/pages')
+      // })
+
       // alert('login success with username '+ params.username)
       // sessionStorage.setItem('token', '1234')
       // this.router.navigateByUrl('/todo-list')
     // } else{
     //   alert('Invalid email or password!')
-    // }
+    }
   }
   }
 

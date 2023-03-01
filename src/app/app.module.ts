@@ -8,14 +8,16 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { HttpClientModule } from '@angular/common/http'
 import { AuthService } from './auth/auth.service';
-import { HomeComponent } from './pages/home/home.component';
+import { PagesComponent } from './pages/pages.component';
+import { NavbarComponent } from './shared/component/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    PagesComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
