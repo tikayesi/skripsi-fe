@@ -1,6 +1,15 @@
-<form>
+<form class="mt-3">
     <div class="row">
         <div class="col">
+          <h4> Form Pengaduan</h4>
+          <!-- <div class="mb-3">
+            <label for="nik" class="form-label">No Kasus</label>
+            <input type="text" class="form-control" id="nik" aria-describedby="nik">
+        </div> -->
+        <div *ngIf="role=='admin'" class="mb-3">
+          <label for="nik" class="form-label">Nama Kasus</label>
+          <input type="text" class="form-control" id="nik" aria-describedby="nik">
+      </div>
            <h4> Pelapor</h4>
             <div class="mb-3">
                 <label for="nik" class="form-label">NIK</label>
@@ -10,95 +19,122 @@
                 <label for="name" class="form-label">Nama</label>
                 <input type="text" class="form-control" id="name">
             </div>
-            <div class="mb-3">
+            <div *ngIf="role=='admin'" class="mb-3">
                 <label for="birthPlace" class="form-label">Tempat Lahir</label>
                 <input type="text" class="form-control" id="birthplace">
             </div>
-            <div class="mb-3">
+            <div *ngIf="role=='admin'" class="mb-3">
                 <label for="birthDate" class="form-label">Tanggal Lahir</label>
                 <input type="date" class="form-control" id="birthdate">
             </div>
-            <div class="mb-3">
+            <div *ngIf="role=='admin'" class="mb-3">
                 <label for="telephone" class="form-label">Nomor Telpon</label>
                 <input type="text" class="form-control" id="telephone">
             </div>
-            <div class="mb-3">
+            <div *ngIf="role=='admin'"  class="mb-3">
                 <label for="gender" class="form-label">Jenis Kelamin</label>
                 <input type="text" class="form-control" id="gender">
             </div>
-            <div class="mb-3">
+            <div *ngIf="role=='admin'" class="mb-3">
                 <label for="address" class="form-label">Alamat</label>
                 <input type="text" class="form-control" id="address">
             </div>
             <h4> Korban</h4>
             <div class="mb-3">
-                <label for="nik" class="form-label">NIK</label>
-                <input type="text" class="form-control" id="nik" aria-describedby="nik">
+                <label for="nik" class="form-label">NIK / Nama</label>
+                <small style="color: red;"> (* Jika Tidak ditemukan, silahkan tambah data baru)</small>
+                <input type="text" class="form-control" id="nik" aria-describedby="nik" placeholder="Cari...">
             </div>
-            <div class="mb-3">
+
+            <br>
+            <!-- <div class="mb-3">
                 <label for="name" class="form-label">Nama</label>
                 <input type="text" class="form-control" id="name">
-            </div>
-            <button type="button" class="btn btn-info">Tambah</button>
+            </div> -->
+            <button type="button" class="btn btn-info mb-2">Tambah Data Korban</button>
             <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                </tbody>
-              </table>
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">NIK</th>
+                  <th scope="col">Nama</th>
+                  <th scope="col">Jenis Kelamin</th>
+                  <th scope="col">Usia</th>
+                  <th scope="col">Alamat</th>
+                  <th scope="col">Hubungan dengan Pelapor</th>
+                  <th scope="col">Hubungan dengan Pelaku</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>1699092333223312</td>
+                  <td>Briana Dewi</td>
+                  <td>Perempuan</td>
+                  <td>27</td>
+                  <td>Jl Kuningan no.2 Jakarta</td>
+                  <td>Kakak</td>
+                  <td>Istri</td>
+                  <td>
+                    <button type="button" class="btn btn-danger btn-sm m-1" >Hapus</button>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>1699092333223312</td>
+                  <td>Siti Kalevi</td>
+                  <td>Perempuan</td>
+                  <td>9</td>
+                  <td>Jl Kuningan no.2 Jakarta</td>
+                  <td>Ponakan</td>
+                  <td>Anak</td>
+                  <td>
+                    <button type="button" class="btn btn-danger btn-sm m-1" >Hapus</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
         </div>
 
         <div class="col">
          
             <h4> Terlapor </h4>
             <div class="mb-3">
-                <label for="nik" class="form-label">NIK</label>
-                <input type="text" class="form-control" id="nik" aria-describedby="nik">
+                <label for="nik" class="form-label">NIK / Nama</label>
+                <small style="color: red;"> (* Jika Tidak ditemukan, silahkan tambah data baru)</small>
+                <input type="text" class="form-control" id="nik" aria-describedby="nik" placeholder="Cari...">
             </div>
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <label for="name" class="form-label">Nama</label>
                 <input type="text" class="form-control" id="name">
-            </div>
-            <button type="button" class="btn btn-info">Tambah</button>
+            </div> -->
+            <button type="button" class="btn btn-info mb-2">Tambah Data Pelaku</button>
             <table class="table table-bordered">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">NIK</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Jenis Kelamin</th>
+                    <th scope="col">Usia</th>
+                    <th scope="col">Alamat</th>
+                    <th scope="col">Hubungan dengan Korban</th>
+                    <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
+                    <td>1666989978900191</td>
+                    <td>Gunawan Sejeko</td>
+                    <td>Laki-laki</td>
+                    <td>28</td>
+                    <td>Jl Kuningan no.2 Jakarta</td>
+                    <td>Suami dan Ayah</td>
+                    <td>
+                      <button type="button" class="btn btn-danger btn-sm m-1" >Hapus</button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -106,19 +142,41 @@
               <h4> Ringkasan Keluhan </h4>
               <div class="mb-3">
                 <label for="problem" class="form-label">Permasalahan Utama</label>
-                <input type="text" class="form-control" id="problem" aria-describedby="problem">
-            </div>
-              <div class="mb-3">
-                <label for="kind" class="form-label">Jenis Kekerasan</label>
-                <input type="text" class="form-control" id="kind" aria-describedby="kind">
+                <textarea class="form-control" id="problem" aria-describedby="problem"></textarea>
             </div>
             <div class="mb-3">
-                <label for="shape" class="form-label">Bentuk Kekerasan</label>
-                <input type="text" class="form-control" id="shape" aria-describedby="shape">
+              <label for="problem" class="form-label">Jenis Kekerasan</label>
+            <select class="form-select" aria-label="Default select example">
+              <option selected>Pilih Jenis Kekerasan</option>
+              <option value="1">KDRT</option>
+              <option value="2">Kekerasan Terhadap Perempuan</option>
+              <option value="3">Kekerasan Terhadap Anak
+              </option>
+              <option value="4">Anak Berhadapan dengan Hukum (ABH)
+              </option>
+              <option value="5">Anak Berhadapan dengan Hukum (ABH)
+              </option>
+              <option value="6">Lainnya
+              </option>
+            </select>
+            </div>
+            <div class="mb-3">
+              <label for="problem" class="form-label">Bentuk Kekerasan</label>
+            <select class="form-select" aria-label="Default select example">
+              <option selected>Pilih Bentuk Kekerasan</option>
+              <option value="1">Kekerasan Fisik</option>
+              <option value="2">Kekerasan Psikologi</option>
+              <option value="3">Kekerasan Seksual
+              </option>
+              <option value="4">Penelantaran
+              </option>
+              <option value="5">Lainnya
+              </option>
+            </select>
             </div>
             <h4> Kronologi Singkat Kasus </h4>
             <div class="mb-3">
-                <label for="location" class="form-label">Lokasi Kejadian</label>
+                <label for="location" class="form-label">Tempat Kejadian</label>
                 <input type="text" class="form-control" id="location" aria-describedby="location">
             </div>
             <div class="mb-3">
@@ -126,19 +184,32 @@
                 <input type="date" class="form-control" id="time" aria-describedby="time">
             </div>
             <div class="mb-3">
-                <label for="relation" class="form-label">Hubungan Pelaku Dengan Korban</label>
-                <input type="date" class="form-control" id="relation" aria-describedby="relation">
-            </div>
-            <div class="mb-3">
-                <label for="history" class="form-label">Riwayat Kasus</label>
+                <label for="history" class="form-label">Kronologi Singkat Kejadian</label>
                 <textarea class="form-control" id="history" aria-describedby="history"></textarea>
             </div>
             <div class="mb-3">
+              <label for="formFile" class="form-label">Dokumen Pendukung Korban <small style="color: red;">(KTP / KK / Identitas Lainnya)</small></label>
+              <input class="form-control" type="file" id="formFile">
+            </div>
+            <div *ngIf="role=='admin'" class="mb-3">
                 <label for="cancellor" class="form-label">Penanggung Jawab</label>
                 <input type="text" class="form-control" id="cancellor" aria-describedby="cancellor">
             </div> 
-            <button type="button" class="btn btn-warning" routerLink="/pages/report-list">Cancel</button>
-            <button type="submit" class="btn btn-primary"routerLink="/pages/report-list">Submit</button>
+            <div *ngIf="role=='manager'" class="mb-3">
+              <label for="problem" class="form-label">Persetujuan</label>
+            <select class="form-select" aria-label="Default select example">
+              <option selected>Approval</option>
+              <option value="1">Disetujui</option>
+              <option value="2">Ditolak</option>
+            </select>
+            </div>
+            <div class="row">
+              <div class="col d-flex justify-content-end">
+                <button type="button" class="btn btn-warning m-1" routerLink="/pages/report-list">Batal</button>
+                <button type="submit" class="btn btn-primary m-1"routerLink="/pages/report-list">Simpan</button>
+              </div>
+            </div>
+
         </div>
     </div>
 </form>

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light bg-light mb-3">
+<nav class="navbar navbar-light bg-light mb-0">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
         <div class="row">
@@ -13,26 +13,38 @@
     </div>
       </a>
       <div>
-      Welcome, User
+      Selamat Datang, Detiaz
       </div>
     </div>
   </nav>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-2 bg-light">
-        <div class="col-12 btn btn-info m-1 bi bi-pc-display-horizontal" type="button" routerLink="/pages">
-          Dashboard
+      <div class="col-2 text-left" style="background-color: #0DCAF0; height: 250vh;">
+        <div *ngIf="role=='admin'" class="col-12 btn btn-info m-1 mt-3 bi bi-pc-display-horizontal d-flex justify-content-start" type="button" routerLink="/pages">
+          &nbsp; Dashboard
         </div>
-        <div class="col-12 btn btn-info m-1 bi bi-file-earmark-text" type="button" routerLink="/pages/report-list">
-          Laporan
+        <div *ngIf="role=='user'" class="col-12 btn btn-info m-1 mt-3 bi bi-file-earmark-text d-flex justify-content-start" type="button" routerLink="/pages/report-list">
+          &nbsp; Laporan
         </div>
-        <div class="col-12 btn btn-info m-1 bi bi-clock-history" type="button">
-          Data Kasus
+        <div *ngIf="role=='admin'" class="col-12 btn btn-info m-1 bi bi-file-earmark-text d-flex justify-content-start" type="button" routerLink="/pages/report-list">
+          &nbsp; Laporan
         </div>
-        <div class="col-12 btn btn-info m-1 bi bi-clock-history" type="button">
-          Data User
+        <div *ngIf="role=='user'" class="col-12 btn btn-info m-1 bi bi-person d-flex justify-content-start" type="button" routerLink="/pages/profile">
+          &nbsp; Profile
         </div>
-        <div class="col-12 btn btn-danger m-1 bi bi-box-arrow-in-right" type="button" routerLink="/">
+        <div *ngIf="role=='admin'" class="col-12 btn btn-info m-1 bi bi-clipboard-data d-flex justify-content-start" type="button" routerLink="/pages/case-list">
+          &nbsp; Data Kasus
+        </div>
+        <div *ngIf="role=='admin'" class="col-12 btn btn-info m-1 bi bi-database-gear d-flex justify-content-start" type="button" routerLink="/pages/user-list">
+          &nbsp; Data User
+        </div>
+        <div *ngIf="role=='admin'" class="col-12 btn btn-info m-1 bi bi-person-add d-flex justify-content-start" type="button" routerLink="/pages/employee-list">
+          &nbsp; Data Pegawai
+        </div>
+        <div class="col-12 btn btn-info m-1  bi bi-question-circle d-flex justify-content-start" type="button" routerLink="/pages/help">
+          &nbsp; Bantuan
+        </div>
+        <div class="col-12 btn btn-danger m-1 mt-5 bi bi-box-arrow-in-right" type="button" routerLink="/">
           Logout
         </div>
       </div>

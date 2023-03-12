@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./report-form.component.css']
 })
 export class ReportFormComponent {
+  role : any = '';
+
+  ngOnInit(): void {
+      this.role = sessionStorage.getItem("role");
+  }
 
 }

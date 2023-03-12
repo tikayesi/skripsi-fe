@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent {
+  role : any = '';
+
+  ngOnInit(): void {
+      this.role = sessionStorage.getItem("role");
+  }
 
 }

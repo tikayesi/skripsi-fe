@@ -1,0 +1,187 @@
+
+<div class="container">
+<h4> Ringkasan Keluhan </h4>
+<div class="mb-3">
+  <label for="problem" class="form-label">Permasalahan Utama</label>
+  <textarea class="form-control" id="problem" aria-describedby="problem"></textarea>
+</div>
+<div class="mb-3">
+<label for="problem" class="form-label">Jenis Kekerasan</label>
+<select class="form-select" aria-label="Default select example">
+<option selected>Pilih Jenis Kekerasan</option>
+<option value="1">KDRT</option>
+<option value="2">Kekerasan Terhadap Perempuan</option>
+<option value="3">Kekerasan Terhadap Anak
+</option>
+<option value="4">Anak Berhadapan dengan Hukum (ABH)
+</option>
+<option value="5">Anak Berhadapan dengan Hukum (ABH)
+</option>
+<option value="6">Lainnya
+</option>
+</select>
+</div>
+<div class="mb-3">
+<label for="problem" class="form-label">Bentuk Kekerasan</label>
+<select class="form-select" aria-label="Default select example">
+<option selected>Pilih Bentuk Kekerasan</option>
+<option value="1">Kekerasan Fisik</option>
+<option value="2">Kekerasan Psikologi</option>
+<option value="3">Kekerasan Seksual
+</option>
+<option value="4">Penelantaran
+</option>
+<option value="5">Lainnya
+</option>
+</select>
+</div>
+<h4> Kronologi Singkat Kasus </h4>
+<div class="mb-3">
+  <label for="location" class="form-label">Tempat Kejadian</label>
+  <input type="text" class="form-control" id="location" aria-describedby="location">
+</div>
+<div class="mb-3">
+  <label for="time" class="form-label">Waktu Kejadian</label>
+  <input type="date" class="form-control" id="time" aria-describedby="time">
+</div>
+<div class="mb-3">
+  <label for="history" class="form-label">Kronologi Singkat Kejadian</label>
+  <textarea class="form-control" id="history" aria-describedby="history"></textarea>
+</div>
+
+<div class="mb-3">
+  <label for="cancellor" class="form-label">Penanggung Jawab Kasus</label>
+  <input type="text" class="form-control" id="cancellor" aria-describedby="cancellor">
+</div> 
+<h4> Pelapor</h4>
+<div class="mb-3">
+    <label for="nik" class="form-label">NIK</label>
+    <input type="text" class="form-control" id="nik" aria-describedby="nik">
+</div>
+<div class="mb-3">
+    <label for="name" class="form-label">Nama</label>
+    <input type="text" class="form-control" id="name">
+</div>
+<div class="mb-3">
+    <label for="birthPlace" class="form-label">Tempat Lahir</label>
+    <input type="text" class="form-control" id="birthplace">
+</div>
+<div class="mb-3">
+    <label for="birthDate" class="form-label">Tanggal Lahir</label>
+    <input type="date" class="form-control" id="birthdate">
+</div>
+<div class="mb-3">
+    <label for="telephone" class="form-label">Nomor Telpon</label>
+    <input type="text" class="form-control" id="telephone">
+</div>
+<div class="mb-3">
+    <label for="gender" class="form-label">Jenis Kelamin</label>
+    <input type="text" class="form-control" id="gender">
+</div>
+<div class="mb-3">
+    <label for="address" class="form-label">Alamat</label>
+    <input type="text" class="form-control" id="address">
+</div>
+<h4> Korban</h4>
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">NIK</th>
+        <th scope="col">Nama</th>
+        <th scope="col">Jenis Kelamin</th>
+        <th scope="col">Usia</th>
+        <th scope="col">Alamat</th>
+        <th scope="col">Hubungan dengan Pelapor</th>
+        <th scope="col">Hubungan dengan Pelaku</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>1699092333223312</td>
+        <td>Briana Dewi</td>
+        <td>Perempuan</td>
+        <td>27</td>
+        <td>Jl Kuningan no.2 Jakarta</td>
+        <td>Kakak</td>
+        <td>Istri</td>
+        <td>
+          <button type="button" class="btn btn-danger btn-sm m-1" >Hapus</button>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>1699092333223312</td>
+        <td>Siti Kalevi</td>
+        <td>Perempuan</td>
+        <td>9</td>
+        <td>Jl Kuningan no.2 Jakarta</td>
+        <td>Ponakan</td>
+        <td>Anak</td>
+        <td>
+          <button type="button" class="btn btn-danger btn-sm m-1" >Hapus</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h4>Pelaku</h4>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">NIK</th>
+        <th scope="col">Nama</th>
+        <th scope="col">Jenis Kelamin</th>
+        <th scope="col">Usia</th>
+        <th scope="col">Alamat</th>
+        <th scope="col">Hubungan dengan Korban</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>1666989978900191</td>
+        <td>Gunawan Sejeko</td>
+        <td>Laki-laki</td>
+        <td>28</td>
+        <td>Jl Kuningan no.2 Jakarta</td>
+        <td>Suami dan Ayah</td>
+        <td>
+          <button type="button" class="btn btn-danger btn-sm m-1" >Hapus</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="mb-3">
+    <label for="formFile" class="form-label">Dokumen Pendukung Korban <small style="color: red;">(KTP / KK / Identitas Lainnya)</small></label><br>
+    <button type="button" class="btn btn-primary btn-sm m-1">Download</button>
+    </div>
+    <div class="mb-3">
+        <label for="problem" class="form-label">Status Kasus</label>
+      <select class="form-select" aria-label="Default select example">
+        <option selected>Pilih Status Kasus</option>
+        <option value="1">Belum Ditangani</option>
+        <option value="2">Sedang ditangani</option>
+        <option value="3">Assesment
+        </option>
+        <option value="4">Intervensi
+        </option>
+        <option value="5">Terminasi
+        </option>
+        <option value="6">Monev
+        </option>
+      </select>
+      </div>
+      <div class="row">
+        <div class="col d-flex justify-content-end">
+          <button type="button" class="btn btn-warning m-1" routerLink="/pages/report-list">Batal</button>
+          <button type="submit" class="btn btn-primary m-1"routerLink="/pages/report-list">Simpan</button>
+        </div>
+      </div>
+</div>
+
+
+

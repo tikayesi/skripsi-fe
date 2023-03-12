@@ -1,0 +1,70 @@
+<h4 class="mt-3">
+    Data Kasus
+    </h4>
+    <div class="row">
+      <!-- <div class="col"><button type="button" class="btn btn-info mt-3 mb-2" routerLink="/pages/report-form"></button></div> -->
+      <div class="offset-9 col-3">
+      <form class="form-inline m-0">
+        <div class="row">
+          <div class="col">
+        <input class="form-control m-0" type="search" placeholder="Cari..." aria-label="Search">
+      </div>
+      <div class="col">
+        <button class="btn btn-outline-success m-0" type="submit">Cari</button>
+      </div>
+      </div>
+      </form>
+    </div>
+    </div>
+    
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">No Kasus</th>
+          <th scope="col">Nama Kasus</th>
+          <th scope="col">Tanggal Pengaduan</th>
+          <th scope="col">Status Kasus</th>
+          <th scope="col">Penanggung Jawab</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>PPA001</td>
+          <td>KDRT</td>
+          <td>5 Maret 2023</td>
+          <td>Sudah Ditangani</td>
+          <td>Azizul Al Wahid</td>
+          <td>
+            <button class="btn btn-info m-1" routerLink="/pages/case-detail">Detail</button>
+            <button class="btn btn-success m-1">Export</button>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>PPA002</td>
+          <td>Kekerasan Seksual</td>
+          <td>11 Maret 2023</td>
+          <td>Sedang Ditangani</td>
+          <td>Dewi Mustika Sari</td>
+          <td>
+            <button class="btn btn-info m-1" routerLink="/pages/case-detail">Detail</button>
+            <button class="btn btn-success m-1">Export</button>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>PPA003</td>
+          <td>Penyiksaan Anak dibawah umur</td>
+          <td>12 Maret 2023</td>
+          <td>Belum DItangani</td>
+          <td>Tika Yesi Kristiani</td>
+          <td>
+            <button class="btn btn-info m-1" routerLink="/pages/case-detail">Detail</button>
+            <button class="btn btn-success m-1">Export</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
