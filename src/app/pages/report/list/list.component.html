@@ -32,40 +32,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>PPA001</td>
-          <td>KDRT</td>
-          <td>5 Maret 2023</td>
-          <td>Sudah Ditangani</td>
-          <td>Azizul Al Wahid</td>
+        <tr  *ngFor="let report of reports; let i = index">
+          <th scope="row">{{(i+1)}}</th>
+          <td>{{report.caseNumber}}</td>
+          <td>{{report.caseName}}</td>
+          <td>{{report.complaintDate | date}}</td>
+          <td>{{report.caseStatus}}</td>
+          <td>{{report.chancellorId.fullName}}</td>
           <td>
-            <button *ngIf="role=='admin'" class="btn btn-warning m-1" routerLink="/pages/report-form">Ubah</button>
-            <button *ngIf="role=='user'" class="btn btn-info m-1" routerLink="/pages/report-form">Detail</button>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>PPA002</td>
-          <td>Kekerasan Seksual</td>
-          <td>11 Maret 2023</td>
-          <td>Sedang Ditangani</td>
-          <td>Dewi Mustika Sari</td>
-          <td>
-            <button *ngIf="role=='admin'" class="btn btn-warning m-1">Ubah</button>
-            <button *ngIf="role=='user'" class="btn btn-info m-1" routerLink="/pages/report-form" routerLink="/pages/report-form">Detail</button>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>PPA003</td>
-          <td>Penyiksaan Anak dibawah umur</td>
-          <td>12 Maret 2023</td>
-          <td>Belum DItangani</td>
-          <td>Tika Yesi Kristiani</td>
-          <td>
-            <button *ngIf="role=='admin'" class="btn btn-warning m-1">Ubah</button>
-            <button *ngIf="role=='user'" class="btn btn-info m-1" routerLink="/pages/report-form">Detail</button>
+            <button *ngIf="role=='admin'" class="btn btn-warning m-1" (click)="getDetailData(report)">Ubah</button>
+            <button *ngIf="role=='user'" class="btn btn-info m-1" (click)="getDetailData(report)">Detail</button>
           </td>
         </tr>
       </tbody>

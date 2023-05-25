@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { PagesRoutingModule } from './pages-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,6 +14,8 @@ import { HelpComponent } from './help/help.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
 import { CaseFollowUpComponent } from './case-follow-up/case-follow-up.component';
+import { UserService } from './user/user.service';
+import { AgePipe } from '../shared/pipes/age.pipes';
 
 
 @NgModule({
@@ -29,6 +31,7 @@ import { CaseFollowUpComponent } from './case-follow-up/case-follow-up.component
     ProfileComponent,
     EmployeeListComponent,
     CaseFollowUpComponent,
+    AgePipe
   ],
   imports: [
     CommonModule,
@@ -36,6 +39,7 @@ import { CaseFollowUpComponent } from './case-follow-up/case-follow-up.component
     FormsModule,
     ReactiveFormsModule
 
-  ]
+  ],
+  providers: [UserService, DatePipe],
 })
 export class PagesModule { }

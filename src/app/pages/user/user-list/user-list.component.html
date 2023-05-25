@@ -19,7 +19,7 @@
     
     <table class="table table-striped">
       <thead>
-        <tr>
+        <tr >
           <th scope="col">#</th>
           <th scope="col">NIK</th>
           <th scope="col">Nama</th>
@@ -30,89 +30,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>1666989978900191</td>
-                    <td>Gunawan Sejeko</td>
-                    <td>Laki-laki</td>
-                    <td>28</td>
-                    <td>Jl Kuningan no.2 Jakarta</td>
+        <tr *ngFor="let user of users; let i = index">
+          <th scope="row">{{(i+1)}}</th>
+          <td>{{user.nik}}</td>
+                    <td>{{user.fullName}}</td>
+                    <td>{{user.gender}}</td>
+                    <td>{{user.birthDate | age}}</td>
+                    <td>{{user.address}}</td>
           <td>
-            <button class="btn btn-warning m-1">Ubah</button>
-            <button class="btn btn-danger m-1">Hapus</button>
+            <button class="btn btn-warning m-1" (click)="getDetailData(user)">Ubah</button>
+            <button class="btn btn-danger m-1" (click)="deleteUser(user.id)">Hapus</button>
           </td>
         </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>1699092333223312</td>
-          <td>Briana Dewi</td>
-          <td>Perempuan</td>
-          <td>27</td>
-          <td>Jl Kuningan no.2 Jakarta</td>
-          <td>
-            <button class="btn btn-warning m-1">Ubah</button>
-            <button class="btn btn-danger m-1">Hapus</button>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>1699092333223312</td>
-                  <td>Siti Kalevi</td>
-                  <td>Perempuan</td>
-                  <td>9</td>
-                  <td>Jl Kuningan no.2 Jakarta</td>
-          <td>
-            <button class="btn btn-warning m-1">Ubah</button>
-            <button class="btn btn-danger m-1">Hapus</button>
-          </td>
-        </tr>
-        <tr>
-            <th scope="row">4</th>
-            <td>1699092333223313</td>
-                    <td>Dewi Tika Nurazizul</td>
-                    <td>Perempuan</td>
-                    <td>25</td>
-                    <td>Jl Kuningan no.5 Jakarta</td>
-            <td>
-              <button class="btn btn-warning m-1">Ubah</button>
-              <button class="btn btn-danger m-1">Hapus</button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">5</th>
-            <td>2402007021</td>
-            <td>Tika Yesi Kristiani</td>
-            <td>Perempuan</td>
-            <td>25</td>
-            <td>Jl H Dahlan No 75 Jakarta Selatan</td>
-            <td>
-              <button class="btn btn-warning m-1">Ubah</button>
-              <button class="btn btn-danger m-1">Hapus</button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">6</th>
-            <td>2402006523</td>
-            <td>Azizul Al Wahid</td>
-            <td>Laki-laki</td>
-            <td>28</td>
-            <td>Jl Kedondong No 24 Jawa Timur</td>
-            <td>
-              <button class="btn btn-warning m-1">Ubah</button>
-              <button class="btn btn-danger m-1">Hapus</button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">7</th>
-            <td>2401994972</td>
-            <td>Dewi Mustika Sari</td>
-            <td>Perempuan</td>
-            <td>29</td>
-            <td>Jl Dahlia No 5 Bogor Raya</td>
-            <td>
-              <button class="btn btn-warning m-1">Ubah</button>
-              <button class="btn btn-danger m-1">Hapus</button>
-            </td>
-          </tr>
       </tbody>
     </table>

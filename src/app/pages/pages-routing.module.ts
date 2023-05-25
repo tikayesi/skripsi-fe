@@ -25,6 +25,10 @@ const routes: Routes = [
         component: ReportFormComponent,
       },
       {
+        path: 'report-form/:id',
+        component: ReportFormComponent,
+      },
+      {
         path: 'report-list',
         component: ListComponent,
       },
@@ -34,6 +38,10 @@ const routes: Routes = [
       },
       {
         path: 'user-form',
+        component: UserFormComponent,
+      },
+      {
+        path: 'user-form/:id',
         component: UserFormComponent,
       },
       {

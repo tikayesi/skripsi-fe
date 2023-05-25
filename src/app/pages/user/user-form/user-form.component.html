@@ -1,68 +1,107 @@
 <div class="containe-fluid">
-    <h4 class="mt
+  <h4 class="mt
     -3">
-        Form Tambah User
-    </h4>
-<form>
+    Form Tambah User
+  </h4>
+  <form [formGroup]="registerForm" method="post" (ngSubmit)="register(registerForm.value)">
     <div class="row">
+      <div class="col" formGroupName="userDetail">
+        <div class="form-group" hidden>
+          <input type="text" class="form-control" id="id" aria-describedby="id" formControlName="id">
+        </div>
+        <div class="form-group">
+          <label for="fullName">Nama Lengkap</label>
+          <input type="text" class="form-control" id="fullName" aria-describedby="fullName" placeholder="John Doe ..."
+            formControlName="fullName">
+        </div>
+        <div class="form-group">
+          <label for="NIK">NIK</label>
+          <input type="number" class="form-control" id="NIK" aria-describedby="NIK" placeholder="NIK"
+            formControlName="nik">
+        </div>
+        <div class="form-group">
+          <label for="phoneNumber">Nomor Telephone</label>
+          <input type="number" class="form-control" id="phoneNumber" aria-describedby="phoneNumber"
+            placeholder="Nomor Telephone" formControlName="phoneNumber">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="Email"
+            formControlName="email">
+        </div>
+        <div class="mb-3 form-group">
+          <label for="problem" class="form-label">Agama</label>
+          <select class="form-select" aria-label="Default select example" formControlName="religion">
+            <option selected>Agama</option>
+            <option value="Islam">Islam</option>
+            <option value="Kristen">Kristen</option>
+            <option value="Budha">Budha</option>
+            <option value="Katolik">Katolik</option>
+            <option value="Hindu">Hindu</option>
+            <option value="Kong Hu Chu">Kong Hu Chu</option>
+          </select>
+        </div>
+        <div class="mb-3 form-group">
+          <label for="problem" class="form-label">Jenis Kelamin</label>
+          <select class="form-select" aria-label="Default select example" formControlName="gender">
+            <option value="Laki-Laki">Laki-Laki</option>
+            <option value="Perempuan">Perempuan</option>
+          </select>
+        </div>
+
+      </div>
       <div class="col">
-    <div class="form-group">
-      <label for="exampleInputfullname">Nama Lengkap</label>
-      <input type="text" class="form-control" id="exampleInputfullname" aria-describedby="emailHelp" placeholder="John Doe ...">
+        <div class="form-group" formGroupName="userDetail">
+          <label for="birthDate">Tanggal Lahir</label>
+          <input type="date" class="form-control" id="birthDate" aria-describedby="birthDate"
+            placeholder="Tanggal Lahir" formControlName="birthDate">
+        </div>
+        <div class="form-group" formGroupName="userDetail">
+          <label for="birthPlace">Tempat Lahir</label>
+          <input type="text" class="form-control" id="birthPlace" aria-describedby="birthPlace"
+            placeholder="Tempat Lahir" formControlName="birthPlace">
+        </div>
+        <div class="form-group" formGroupName="userDetail">
+          <label for="address">Alamat</label>
+          <input type="text" class="form-control" id="address" aria-describedby="address" placeholder="Alamat"
+            formControlName="address">
+        </div>
+        <div class="mb-3 form-group" formGroupName="userDetail">
+          <label for="problem" class="form-label">Pendidikan</label>
+          <select class="form-select" aria-label="Default select example" formControlName="education">
+            <option value="SD">SD</option>
+            <option value="SMP">SMP</option>
+            <option value="SMA">SMA</option>
+            <option value="D3">D3</option>
+            <option value="S1">S1</option>
+            <option value="S2">S2</option>
+            <option value="S3">S3</option>
+            <option value="Tidak Sekolah">Tidak Sekolah</option>
+            <option value="Lainnya">Lainnya...</option>
+          </select>
+        </div>
+        <div class="form-group" formGroupName="userDetail">
+          <label for="otherInformation">Informasi Lainnya</label>
+          <input type="text" class="form-control" id="otherInformation" aria-describedby="otherInformation"
+            placeholder="Informasi Lainnya" formControlName="otherInformation">
+        </div>
+        <div *ngIf="user == null" class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username" aria-describedby="username" placeholder="Username"
+            formControlName="username">
+        </div>
+        <div *ngIf="user == null" class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password">
+        </div>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="exampleInputNIK">NIK</label>
-      <input type="number" class="form-control" id="exampleInputNIK" aria-describedby="emailHelp" placeholder="NIK">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPhoneNumber">Nomor Telephone</label>
-      <input type="number" class="form-control" id="exampleInputPhoneNumber" aria-describedby="emailHelp" placeholder="Nomor Telephone">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPhoneNumber">Email</label>
-      <input type="email" class="form-control" id="exampleInputPhoneNumber" aria-describedby="emailHelp" placeholder="Email">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPhoneNumber">Agama</label>
-      <input type="text" class="form-control" id="exampleInputPhoneNumber" aria-describedby="emailHelp" placeholder="Agama">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Username</label>
-      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username">
-    </div>
-  </div>
-  <div class="col">
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Tanggal Lahir</label>
-      <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Tanggal Lahir">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Tempat Lahir</label>
-      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Tempat Lahir">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Alamat</label>
-      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Alamat">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPhoneNumber">Pendidikan</label>
-      <input type="text" class="form-control" id="exampleInputPhoneNumber" aria-describedby="emailHelp" placeholder="Pendidikan">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPhoneNumber">Informasi Lainnya</label>
-      <input type="text" class="form-control" id="exampleInputPhoneNumber" aria-describedby="emailHelp" placeholder="Informasi Lainnya">
-    </div>
-  </div>
-</div>
     <br>
     <div class="row ">
-      <div class="col d-flex justify-content-end"> <button type="submit" class="btn btn-warning m-1" routerLink="/pages/user-list">Batal</button>
-        <button type="submit" class="btn btn-primary m-1" routerLink="/pages/user-list">Simpan</button>
+      <div class="col d-flex justify-content-end"> <button type="submit" class="btn btn-warning m-1"
+          routerLink="/pages/user-list">Batal</button>
+        <button type="submit" class="btn btn-primary m-1">Simpan</button>
       </div>
-  </div>
+    </div>
   </form>
 </div>

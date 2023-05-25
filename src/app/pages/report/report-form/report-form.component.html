@@ -1,215 +1,253 @@
-<form class="mt-3">
-    <div class="row">
-        <div class="col">
-          <h4> Form Pengaduan</h4>
-          <!-- <div class="mb-3">
-            <label for="nik" class="form-label">No Kasus</label>
-            <input type="text" class="form-control" id="nik" aria-describedby="nik">
-        </div> -->
-        <div *ngIf="role=='admin'" class="mb-3">
-          <label for="nik" class="form-label">Nama Kasus</label>
-          <input type="text" class="form-control" id="nik" aria-describedby="nik">
+<form [formGroup]="reportForm" (ngSubmit)="submitReport(reportForm.value)" class="mt-3">
+  <div class="row">
+    <div class="col">
+      <h4> Form Pengaduan</h4>
+      <div *ngIf="role=='admin'" class="mb-3">
+        <label for="nik" class="form-label">Nama Kasus</label>
+        <input type="text" class="form-control" id="nik" aria-describedby="nik" formControlName="caseName">
       </div>
-           <h4> Pelapor</h4>
-            <div class="mb-3">
-                <label for="nik" class="form-label">NIK</label>
-                <input type="text" class="form-control" id="nik" aria-describedby="nik">
-            </div>
-            <div class="mb-3">
-                <label for="name" class="form-label">Nama</label>
-                <input type="text" class="form-control" id="name">
-            </div>
-            <div *ngIf="role=='admin'" class="mb-3">
-                <label for="birthPlace" class="form-label">Tempat Lahir</label>
-                <input type="text" class="form-control" id="birthplace">
-            </div>
-            <div *ngIf="role=='admin'" class="mb-3">
-                <label for="birthDate" class="form-label">Tanggal Lahir</label>
-                <input type="date" class="form-control" id="birthdate">
-            </div>
-            <div *ngIf="role=='admin'" class="mb-3">
-                <label for="telephone" class="form-label">Nomor Telpon</label>
-                <input type="text" class="form-control" id="telephone">
-            </div>
-            <div *ngIf="role=='admin'"  class="mb-3">
-                <label for="gender" class="form-label">Jenis Kelamin</label>
-                <input type="text" class="form-control" id="gender">
-            </div>
-            <div *ngIf="role=='admin'" class="mb-3">
-                <label for="address" class="form-label">Alamat</label>
-                <input type="text" class="form-control" id="address">
-            </div>
-            <h4> Korban</h4>
-            <div class="mb-3">
-                <label for="nik" class="form-label">NIK / Nama</label>
-                <small style="color: red;"> (* Jika Tidak ditemukan, silahkan tambah data baru)</small>
-                <input type="text" class="form-control" id="nik" aria-describedby="nik" placeholder="Cari...">
-            </div>
+      <div *ngIf="role=='admin'" class="mb-3">
+        <label for="nik" class="form-label">Nomor Kasus</label>
+        <input type="text" class="form-control" id="nik" aria-describedby="nik" formControlName="caseNumber">
+      </div>
+      <h4> Pelapor</h4>
+      <div class="mb-3">
+        <label for="nik" class="form-label">NIK / Nama</label>
+        <select class="form-select" formControlName="reporter" (change)="onReporterChange()">
+          <option value="" disabled selected>Pilih Pelapor</option>
+          <option *ngFor="let obj of users" [ngValue]="obj">{{ obj.nik }} / {{obj.fullName}}</option>
+        </select>
+      </div>
 
-            <br>
-            <!-- <div class="mb-3">
-                <label for="name" class="form-label">Nama</label>
-                <input type="text" class="form-control" id="name">
-            </div> -->
-            <button type="button" class="btn btn-info mb-2">Tambah Data Korban</button>
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">NIK</th>
-                  <th scope="col">Nama</th>
-                  <th scope="col">Jenis Kelamin</th>
-                  <th scope="col">Usia</th>
-                  <th scope="col">Alamat</th>
-                  <th scope="col">Hubungan dengan Pelapor</th>
-                  <th scope="col">Hubungan dengan Pelaku</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>1699092333223312</td>
-                  <td>Briana Dewi</td>
-                  <td>Perempuan</td>
-                  <td>27</td>
-                  <td>Jl Kuningan no.2 Jakarta</td>
-                  <td>Kakak</td>
-                  <td>Istri</td>
-                  <td>
-                    <button type="button" class="btn btn-danger btn-sm m-1" >Hapus</button>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>1699092333223312</td>
-                  <td>Siti Kalevi</td>
-                  <td>Perempuan</td>
-                  <td>9</td>
-                  <td>Jl Kuningan no.2 Jakarta</td>
-                  <td>Ponakan</td>
-                  <td>Anak</td>
-                  <td>
-                    <button type="button" class="btn btn-danger btn-sm m-1" >Hapus</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+      <div *ngIf="role=='admin'" class="mb-3">
+        <label for="birthPlace" class="form-label">Tempat Lahir</label>
+        <input *ngIf="user; else inputBirthPlace" type="text" class="form-control" id="birthplace"
+          formControlName="birthPlace">
+        <ng-template #inputBirthPlace>
+          <input type="text" class="form-control" id="birthplace" formControlName="birthPlace">
+        </ng-template>
+      </div>
+
+      <div *ngIf="role=='admin'" class="mb-3">
+        <label for="birthDate" class="form-label">Tanggal Lahir</label>
+        <input *ngIf="user; else inputBirthDate" name="birthDate" type="date" class="form-control" id="birthdate"
+          [ngModel]="user.birthDate" (ngModelChange)="user.birthDate = $event" formControlName="birthDate">
+        <ng-template #inputBirthDate>
+          <input type="date" class="form-control" id="birthDate" formControlName="birthDate">
+        </ng-template>
+      </div>
+
+
+      <div *ngIf="role=='admin'" class="mb-3">
+        <label for="telephone" class="form-label">Nomor Telpon</label>
+        <input *ngIf="user; else inputPhoneNumber" name="phoneNumber" type="text" class="form-control" id="telephone"
+          formControlName="phoneNumber">
+        <ng-template #inputPhoneNumber>
+          <input type="text" class="form-control" id="birthplace" formControlName="phoneNumber">
+        </ng-template>
+      </div>
+      <div *ngIf="role=='admin'" class="mb-3">
+        <label for="gender" class="form-label">Jenis Kelamin</label>
+        <input *ngIf="user; else inputGender" name="gender" type="text" class="form-control" id="gender"
+          formControlName="gender">
+        <ng-template #inputGender>
+          <input type="text" class="form-control" id="birthplace" formControlName="gender">
+        </ng-template>
+      </div>
+      <div *ngIf="role=='admin'" class="mb-3">
+        <label for="address" class="form-label">Alamat</label>
+        <input *ngIf="user; else inputAddress" name="address" type="text" class="form-control" id="address"
+          formControlName="address">
+        <ng-template #inputAddress>
+          <input type="text" class="form-control" id="birthplace" formControlName="address">
+        </ng-template>
+      </div>
+      <!-- <form [formGroup]="victimForm" method="post" (ngSubmit)="submitVictim(victimForm.value)"> -->
+      <div class="col" formGroupName="victimForm">
+        <!-- <div class="col" [formGroup]="reportForm.get('victimForm')" (ngSubmit)="submitVictim(reportForm.value)"> -->
+        <h4> Korban</h4>
+        <div class="mb-3">
+          <label for="selectedUser" class="form-label">NIK / Nama</label>
+          <small style="color: red;"> (* Jika Tidak ditemukan, silahkan tambah data user baru)</small>
+          <select class="form-select" formControlName="userDetail">
+            <option value="" disabled selected>Cari ... </option>
+            <option *ngFor="let obj of users" [ngValue]="obj">{{ obj.nik }} / {{obj.fullName}}</option>
+          </select>
         </div>
 
-        <div class="col">
-         
-            <h4> Terlapor </h4>
-            <div class="mb-3">
-                <label for="nik" class="form-label">NIK / Nama</label>
-                <small style="color: red;"> (* Jika Tidak ditemukan, silahkan tambah data baru)</small>
-                <input type="text" class="form-control" id="nik" aria-describedby="nik" placeholder="Cari...">
-            </div>
-            <!-- <div class="mb-3">
-                <label for="name" class="form-label">Nama</label>
-                <input type="text" class="form-control" id="name">
-            </div> -->
-            <button type="button" class="btn btn-info mb-2">Tambah Data Pelaku</button>
-            <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">NIK</th>
-                    <th scope="col">Nama</th>
-                    <th scope="col">Jenis Kelamin</th>
-                    <th scope="col">Usia</th>
-                    <th scope="col">Alamat</th>
-                    <th scope="col">Hubungan dengan Korban</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>1666989978900191</td>
-                    <td>Gunawan Sejeko</td>
-                    <td>Laki-laki</td>
-                    <td>28</td>
-                    <td>Jl Kuningan no.2 Jakarta</td>
-                    <td>Suami dan Ayah</td>
-                    <td>
-                      <button type="button" class="btn btn-danger btn-sm m-1" >Hapus</button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <h4> Ringkasan Keluhan </h4>
-              <div class="mb-3">
-                <label for="problem" class="form-label">Permasalahan Utama</label>
-                <textarea class="form-control" id="problem" aria-describedby="problem"></textarea>
-            </div>
-            <div class="mb-3">
-              <label for="problem" class="form-label">Jenis Kekerasan</label>
-            <select class="form-select" aria-label="Default select example">
-              <option selected>Pilih Jenis Kekerasan</option>
-              <option value="1">KDRT</option>
-              <option value="2">Kekerasan Terhadap Perempuan</option>
-              <option value="3">Kekerasan Terhadap Anak
-              </option>
-              <option value="4">Anak Berhadapan dengan Hukum (ABH)
-              </option>
-              <option value="5">Anak Berhadapan dengan Hukum (ABH)
-              </option>
-              <option value="6">Lainnya
-              </option>
-            </select>
-            </div>
-            <div class="mb-3">
-              <label for="problem" class="form-label">Bentuk Kekerasan</label>
-            <select class="form-select" aria-label="Default select example">
-              <option selected>Pilih Bentuk Kekerasan</option>
-              <option value="1">Kekerasan Fisik</option>
-              <option value="2">Kekerasan Psikologi</option>
-              <option value="3">Kekerasan Seksual
-              </option>
-              <option value="4">Penelantaran
-              </option>
-              <option value="5">Lainnya
-              </option>
-            </select>
-            </div>
-            <h4> Kronologi Singkat Kasus </h4>
-            <div class="mb-3">
-                <label for="location" class="form-label">Tempat Kejadian</label>
-                <input type="text" class="form-control" id="location" aria-describedby="location">
-            </div>
-            <div class="mb-3">
-                <label for="time" class="form-label">Waktu Kejadian</label>
-                <input type="date" class="form-control" id="time" aria-describedby="time">
-            </div>
-            <div class="mb-3">
-                <label for="history" class="form-label">Kronologi Singkat Kejadian</label>
-                <textarea class="form-control" id="history" aria-describedby="history"></textarea>
-            </div>
-            <div class="mb-3">
-              <label for="formFile" class="form-label">Dokumen Pendukung Korban <small style="color: red;">(KTP / KK / Identitas Lainnya)</small></label>
-              <input class="form-control" type="file" id="formFile">
-            </div>
-            <div *ngIf="role=='admin'" class="mb-3">
-                <label for="cancellor" class="form-label">Penanggung Jawab</label>
-                <input type="text" class="form-control" id="cancellor" aria-describedby="cancellor">
-            </div> 
-            <div *ngIf="role=='manager'" class="mb-3">
-              <label for="problem" class="form-label">Persetujuan</label>
-            <select class="form-select" aria-label="Default select example">
-              <option selected>Approval</option>
-              <option value="1">Disetujui</option>
-              <option value="2">Ditolak</option>
-            </select>
-            </div>
-            <div class="row">
-              <div class="col d-flex justify-content-end">
-                <button type="button" class="btn btn-warning m-1" routerLink="/pages/report-list">Batal</button>
-                <button type="submit" class="btn btn-primary m-1"routerLink="/pages/report-list">Simpan</button>
-              </div>
-            </div>
-
+        <br>
+        <div class="mb-3">
+          <label for="reporterRelationship" class="form-label">Hubungan Dengan Pelapor</label>
+          <input type="text" class="form-control" id="nik" aria-describedby="reporterRelationship"
+            formControlName="reporterRelationship">
         </div>
+        <div class="mb-3">
+          <label for="suspectRelationship" class="form-label">Hubungan Dengan Pelaku</label>
+          <input type="text" class="form-control" id="nik" aria-describedby="suspectRelationship"
+            formControlName="suspectRelationship">
+        </div>
+        <button type="button" class="btn btn-info mb-2" (click)="submitVictimForm()">Tambah Data Korban</button>
+
+        <!-- </form> -->
+      </div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">NIK</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Jenis Kelamin</th>
+            <th scope="col">Usia</th>
+            <th scope="col">Alamat</th>
+            <th scope="col">Hubungan dengan Pelapor</th>
+            <th scope="col">Hubungan dengan Pelaku</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let vic of victims; let i = index">
+            <th scope="row">{{(i+1)}}</th>
+            <td>{{vic.userDetail.nik}}</td>
+            <td>{{vic.userDetail.fullName}}</td>
+            <td>{{vic.userDetail.gender}}</td>
+            <td>{{vic.userDetail.birthDate | age}}</td>
+            <td>{{vic.userDetail.address}}</td>
+            <td>{{vic.reporterRelationship}}</td>
+            <td>{{vic.suspectRelationship}}</td>
+            <td>
+              <button type="button" class="btn btn-danger btn-sm m-1" (click)="deleteVictim(i)">Hapus</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+
+    <div class="col">
+      <!-- <form [formGroup]="suspectForm" method="post" (ngSubmit)="submitSuspect(suspectForm.value)"> -->
+      <div class="col" formGroupName="suspectForm">
+        <h4> Terlapor </h4>
+        <div class="mb-3">
+          <label for="nik" class="form-label">NIK / Nama</label>
+          <small style="color: red;"> (* Jika Tidak ditemukan, silahkan tambah data user baru)</small>
+          <select class="form-select" formControlName="userDetail">
+            <option value="" disabled selected>Cari ... </option>
+            <option *ngFor="let obj of users" [ngValue]="obj">{{ obj.nik }} / {{obj.fullName}}</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="victimRelationship" class="form-label">Hubungan Dengan Korban</label>
+          <input type="text" class="form-control" id="victimRelationship" aria-describedby="victimRelationship"
+            formControlName="victimRelationship">
+        </div>
+        <button type="button" class="btn btn-info mb-2" (click)="submitSuspect()">Tambah Data Pelaku</button>
+        <!-- </form> -->
+      </div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">NIK</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Jenis Kelamin</th>
+            <th scope="col">Usia</th>
+            <th scope="col">Alamat</th>
+            <th scope="col">Hubungan dengan Korban</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let vic of suspects; let i = index">
+            <th scope="row">{{(i+1)}}</th>
+            <td>{{vic.userDetail.nik}}</td>
+            <td>{{vic.userDetail.fullName}}</td>
+            <td>{{vic.userDetail.gender}}</td>
+            <td>{{vic.userDetail.birthDate | age}}</td>
+            <td>{{vic.userDetail.address}}</td>
+            <td>{{vic.victimRelationship}}</td>
+            <td>
+              <button type="button" class="btn btn-danger btn-sm m-1" (click)="deleteSuspect(i)">Hapus</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4> Ringkasan Keluhan </h4>
+      <div class="mb-3">
+        <label for="problem" class="form-label">Permasalahan Utama</label>
+        <textarea class="form-control" id="problem" aria-describedby="problem"
+          formControlName="summaryComplaint"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="problem" class="form-label">Jenis Kekerasan</label>
+        <select class="form-select" aria-label="Default select example" formControlName="kindOfViolence">
+          <option selected>Pilih Jenis Kekerasan</option>
+          <option value="KDRT">KDRT</option>
+          <option value="Kekerasan Terhadap Perempuan">Kekerasan Terhadap Perempuan</option>
+          <option value="Kekerasan Terhadap Anak">Kekerasan Terhadap Anak
+          </option>
+          <option value="Anak Berhadapan dengan Hukum (ABH)">Anak Berhadapan dengan Hukum (ABH)
+          </option>
+          <option value="Anak Berhadapan dengan Hukum (ABH)">Anak Berhadapan dengan Hukum (ABH)
+          </option>
+          <option value="Lainnya">Lainnya
+          </option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="problem" class="form-label">Bentuk Kekerasan</label>
+        <select class="form-select" aria-label="Default select example" formControlName="violenceForm">
+          <option selected>Pilih Bentuk Kekerasan</option>
+          <option value="Kekerasan Fisik">Kekerasan Fisik</option>
+          <option value="Kekerasan Psikologi">Kekerasan Psikologi</option>
+          <option value="Kekerasan Seksual">Kekerasan Seksual
+          </option>
+          <option value="Penelantaran">Penelantaran
+          </option>
+          <option value="Lainnya">Lainnya
+          </option>
+        </select>
+      </div>
+      <h4> Kronologi Singkat Kasus </h4>
+      <div class="mb-3">
+        <label for="location" class="form-label">Tempat Kejadian</label>
+        <input type="text" class="form-control" id="location" aria-describedby="location"
+          formControlName="locationOfIncident">
+      </div>
+      <div class="mb-3">
+        <label for="time" class="form-label">Waktu Kejadian</label>
+        <input type="date" class="form-control" id="time" aria-describedby="time" formControlName="timeOfIncident">
+      </div>
+      <div class="mb-3">
+        <label for="history" class="form-label">Kronologi Singkat Kejadian</label>
+        <textarea class="form-control" id="history" aria-describedby="history" formControlName="caseHistory"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="formFile" class="form-label">Dokumen Pendukung Korban <small style="color: red;">(KTP / KK /
+            Identitas Lainnya)</small></label>
+        <input class="form-control" type="file" id="formFile">
+      </div>
+      <div *ngIf="role=='admin'" class="mb-3">
+        <label for="cancellor" class="form-label">Penanggung Jawab</label>
+        <select class="form-select" formControlName="chancellorId">
+          <option value="" disabled selected>Cari ... </option>
+          <option *ngFor="let obj of users" [ngValue]="obj">{{obj.fullName}}</option>
+        </select>
+      </div>
+      <div *ngIf="role=='manager'" class="mb-3">
+        <label for="problem" class="form-label">Persetujuan</label>
+        <select class="form-select" aria-label="Default select example" formControlName="caseStatus">
+          <option selected>Approval</option>
+          <option value="Disetujui">Disetujui</option>
+          <option value="Ditolak">Ditolak</option>
+        </select>
+      </div>
+      <div class="row">
+        <div class="col d-flex justify-content-end">
+          <button type="button" class="btn btn-warning m-1" routerLink="/pages/report-list">Batal</button>
+          <button type="submit" class="btn btn-primary m-1">Simpan</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </form>

@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { AuthService } from './auth/auth.service';
 import { PagesComponent } from './pages/pages.component';
 import { NavbarComponent } from './shared/component/navbar/navbar.component';
+import { AgePipe } from './shared/pipes/age.pipes';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { NavbarComponent } from './shared/component/navbar/navbar.component';
     LoginComponent,
     RegisterComponent,
     PagesComponent,
-    NavbarComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
