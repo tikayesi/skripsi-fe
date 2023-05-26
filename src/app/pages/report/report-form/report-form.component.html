@@ -3,22 +3,27 @@
     <div class="col">
       <h4> Form Pengaduan</h4>
       <div *ngIf="role=='admin'" class="mb-3">
-        <label for="nik" class="form-label">Nama Kasus</label>
-        <input type="text" class="form-control" id="nik" aria-describedby="nik" formControlName="caseName">
+        <label for="caseName" class="form-label">Nama Kasus</label>
+        <input type="text" class="form-control" id="caseName" aria-describedby="caseName" formControlName="caseName">
       </div>
       <div *ngIf="role=='admin'" class="mb-3">
-        <label for="nik" class="form-label">Nomor Kasus</label>
-        <input type="text" class="form-control" id="nik" aria-describedby="nik" formControlName="caseNumber">
-      </div>
-      <h4> Pelapor</h4>
-      <div class="mb-3">
-        <label for="nik" class="form-label">NIK / Nama</label>
-        <select class="form-select" formControlName="reporter" (change)="onReporterChange()">
-          <option value="" disabled selected>Pilih Pelapor</option>
-          <option *ngFor="let obj of users" [ngValue]="obj">{{ obj.nik }} / {{obj.fullName}}</option>
-        </select>
+        <label for="caseNumber" class="form-label">Nomor Kasus</label>
+        <input type="text" class="form-control" id="caseNumber" aria-describedby="caseNumber"
+          formControlName="caseNumber">
       </div>
 
+      <div class="mb-3">
+        <label for="reporter" class="form-label">NIK / Nama</label>
+        <select class="form-select" formControlName="reporter" (change)="onReporterChange()">
+          <option value="" disabled>Pilih Pelapor</option>
+          <ng-container *ngFor="let user of users">
+            <option [ngValue]="user" *ngIf="user.id !== selectedReporterData?.id">{{ user.nik }} / {{ user.fullName }}</option>
+          </ng-container>
+          <option [ngValue]="selectedReporterData" *ngIf="selectedReporterData">{{ selectedReporterData.nik }} / {{ selectedReporterData.fullName }}</option>
+        </select>
+      </div>
+      
+      
       <div *ngIf="role=='admin'" class="mb-3">
         <label for="birthPlace" class="form-label">Tempat Lahir</label>
         <input *ngIf="user; else inputBirthPlace" type="text" class="form-control" id="birthplace"
@@ -226,11 +231,15 @@
             Identitas Lainnya)</small></label>
         <input class="form-control" type="file" id="formFile">
       </div>
+
       <div *ngIf="role=='admin'" class="mb-3">
         <label for="cancellor" class="form-label">Penanggung Jawab</label>
-        <select class="form-select" formControlName="chancellorId">
-          <option value="" disabled selected>Cari ... </option>
-          <option *ngFor="let obj of users" [ngValue]="obj">{{obj.fullName}}</option>
+        <select class="form-select" formControlName="chancellorId" (change)="onChancelloerChange()">
+          <option value="" disabled>Cari ... </option>
+          <ng-container *ngFor="let user of users">
+            <option [ngValue]="user" *ngIf="user.id !== selectedChancellorData?.id">{{ user.fullName }}</option>
+          </ng-container>
+          <option [ngValue]="selectedChancellorData" *ngIf="selectedChancellorData">{{selectedChancellorData.fullName}}</option>
         </select>
       </div>
       <div *ngIf="role=='manager'" class="mb-3">

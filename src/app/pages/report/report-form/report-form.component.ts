@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReportService } from '../report.service';
@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
   templateUrl: './report-form.component.html',
   styleUrls: ['./report-form.component.css']
 })
-export class ReportFormComponent {
+export class ReportFormComponent implements OnInit {
   reportForm: FormGroup;
 
   idFromParams: string = ''
@@ -53,32 +53,83 @@ export class ReportFormComponent {
   }
 
   role: any = '';
-  users: UserDetail[] = []
-  user: UserDetail | null = null
-  victim: UserDetail | null = null
-  victims: Victim[] = []
-  suspect: UserDetail | null = null
-  suspects: Suspect[] = []
+  users: UserDetail[] = [];
+  user: UserDetail | null = null;
+  victim: UserDetail | null = null;
+  victims: Victim[] = [];
+  suspect: UserDetail | null = null;
+  suspects: Suspect[] = [];
   declare report: Report;
+  selectedReporter: any | null = null;
+  selectedReporterData: any = null;
+  selectedChancellorData: any = null;
 
+
+  ngOnInit(): void {
+    this.role = sessionStorage.getItem("role");
+  
+    if (Object.keys(this.route.params).length) {
+      this.route.params.subscribe((params) => {
+        console.log('PARAMS: ', params);
+        this.service.getReportById(params['id']).subscribe((res) => {
+          console.log("RESPONSE", res);
+  
+          this.reportForm.get('reporter')?.setValue(res.reporter.nik);
+          this.reportForm.get('chancellorId')?.setValue(res.reporter.fullName);
+  
+          const birthDate = this.formatBirthDate(res.reporter.birthDate.toString());
+          const incidentDate = this.formatBirthDate(res.timeOfIncident.toString());
+  
+          this.victims = res.victims;
+          this.suspects = res.suspects;
+  
+          // Mengisi nilai-nilai pada formulir
+          this.reportForm.patchValue({
+            caseName: res.caseName,
+            caseNumber: res.caseNumber,
+            caseStatus: res.caseStatus,
+            summaryComplaint: res.summaryComplaint,
+            kindOfViolence: res.kindOfViolence,
+            violenceForm: res.violenceForm,
+            locationOfIncident: res.locationOfIncident,
+            timeOfIncident: incidentDate,
+            caseHistory: res.caseHistory,
+            chancellorId: res.chancellorId,
+            reporter: res.reporter, // Mengatur nilai reporter dengan ID reporter dari respons
+            birthPlace: res.reporter.birthPlace,
+            birthDate: birthDate,
+            phoneNumber: res.reporter.phoneNumber,
+            gender: res.reporter.gender,
+            address: res.reporter.address
+          });
+  
+          this.selectedReporterData = res.reporter;
+          this.selectedChancellorData = res.chancellorId
+        });
+      });
+    }
+  
+    this.getAllData();
+  }
+  
+  getAllData() {
+    this.serviceUser.getUserDetailList().subscribe((res: UserDetail[]) => {
+      this.users = res;
+    });
+  }
+  
 
   onReporterChange() {
-    // Dapatkan nilai terpilih dari pelapor
-    const selectedReporter = this.reportForm.get('reporter')?.value;
+    this.selectedReporter = this.reportForm.get('reporter')?.value;
+    if (this.selectedReporter) {
+      const birthDate = this.formatBirthDate(this.selectedReporter.birthDate);
 
-    // Periksa apakah terdapat reporter terpilih
-    if (selectedReporter) {
-      // Mengubah format tanggal
-      const birthDate = new Date(selectedReporter.birthDate);
-      const formattedDate = birthDate.toISOString().substring(0, 10);
-
-      // Isi nilai field-field yang sesuai
       this.reportForm.patchValue({
-        birthPlace: selectedReporter.birthPlace,
-        birthDate: formattedDate, // Menggunakan tanggal dengan format yang sesuai
-        phoneNumber: selectedReporter.phoneNumber,
-        gender: selectedReporter.gender,
-        address: selectedReporter.address
+        birthPlace: this.selectedReporter.birthPlace,
+        birthDate: birthDate,
+        phoneNumber: this.selectedReporter.phoneNumber,
+        gender: this.selectedReporter.gender,
+        address: this.selectedReporter.address
       });
     } else {
       this.reportForm.patchValue({
@@ -91,6 +142,10 @@ export class ReportFormComponent {
     }
   }
 
+  onChancelloerChange() {
+    this.selectedChancellorData = this.reportForm.get('chancellorId')?.value;
+
+  }
 
   formatBirthDate(date: string | undefined): string {
     if (date) {
@@ -98,47 +153,6 @@ export class ReportFormComponent {
       return formattedDate;
     }
     return '';
-  }
-
-
-
-  ngOnInit(): void {
-    this.role = sessionStorage.getItem("role");
-    this.getAllData()
-    if (Object.keys(this.route.params).length) {
-      this.route.params.subscribe((params) => {
-        console.log('PARAMS: ', params);
-        this.service.getReportById(params['id']).subscribe((res) => {
-          console.log("RESPONSE", res);
-          const birthDate = new Date(res.reporter.birthDate);
-          const formattedDate = birthDate.toISOString().substring(0, 10);
-          const insidentDate = new Date(res.timeOfIncident);
-          const formattedD = insidentDate.toISOString().substring(0, 10);
-          this.victims = res.victims
-          this.suspects = res.suspects
-          this.reportForm.patchValue({
-            reporter: res.reporter
-          })
-
-          this.reportForm.get('caseName')?.setValue(res.caseName)
-          this.reportForm.get('caseNumber')?.setValue(res.caseNumber)
-          this.reportForm.get('caseStatus')?.setValue(res.caseStatus)
-          this.reportForm.get('reporter')?.setValue(res.reporter.nik)
-          this.reportForm.get('birthPlace')?.setValue(res.reporter.birthPlace)
-          this.reportForm.get('birthDate')?.setValue(formattedDate)
-          this.reportForm.get('phoneNumber')?.setValue(res.reporter.phoneNumber)
-          this.reportForm.get('gender')?.setValue(res.reporter.gender)
-          this.reportForm.get('address')?.setValue(res.reporter.address)
-          this.reportForm.get('summaryComplaint')?.setValue(res.summaryComplaint)
-          this.reportForm.get('kindOfViolence')?.setValue(res.kindOfViolence)
-          this.reportForm.get('violenceForm')?.setValue(res.violenceForm)
-          this.reportForm.get('locationOfIncident')?.setValue(res.locationOfIncident)
-          this.reportForm.get('timeOfIncident')?.setValue(formattedD)
-          this.reportForm.get('caseHistory')?.setValue(res.caseHistory)
-          this.reportForm.get('chancellorId')?.setValue(res.chancellorId)
-        })
-      })
-    }
   }
 
   submitVictimForm() {
@@ -157,7 +171,6 @@ export class ReportFormComponent {
     }
   }
 
-
   submitSuspect() {
     const suspectForm = this.reportForm.controls['suspectForm'];
     if (suspectForm && suspectForm.valid) {
@@ -172,12 +185,6 @@ export class ReportFormComponent {
     if (suspectForm instanceof FormGroup) {
       suspectForm.reset();
     }
-  }
-
-  getAllData() {
-    this.serviceUser.getUserDetailList().subscribe((res: UserDetail[]) => {
-      this.users = res
-    })
   }
 
   deleteVictim(i: number) {
@@ -196,10 +203,11 @@ export class ReportFormComponent {
           'Data anda sudah dihapus.',
           'success'
         );
-        this.victims.splice(i, 1)
+        this.victims.splice(i, 1);
       }
     });
   }
+
   deleteSuspect(i: number) {
     Swal.fire({
       title: 'Apakah anda yakin?',
@@ -210,7 +218,7 @@ export class ReportFormComponent {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Ya, hapus data ini!'
     }).then((result) => {
-      this.victims.splice(i, 1)
+      this.victims.splice(i, 1);
       if (result.isConfirmed) {
         Swal.fire(
           'Terhapus!',
@@ -221,11 +229,11 @@ export class ReportFormComponent {
     });
   }
 
-
   submitReport(value: Report) {
     value.victims = this.victims;
     value.suspects = this.suspects;
     this.report = value;
+
     Swal.fire({
       title: 'Apakah anda yakin akan mengajukan laporan ini?',
       showDenyButton: true,
@@ -234,14 +242,12 @@ export class ReportFormComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         this.service.createReport(this.report).subscribe(() => {
-          this.router.navigateByUrl('/pages/report-list')
-        })
-        Swal.fire('Diajukan!', '', 'success')
+          this.router.navigateByUrl('/pages/report-list');
+        });
+        Swal.fire('Diajukan!', '', 'success');
       } else if (result.isDenied) {
-        Swal.fire('Pengajuan dibatalkan', '', 'info')
+        Swal.fire('Pengajuan dibatalkan', '', 'info');
       }
-    })
-
+    });
   }
-
 }
